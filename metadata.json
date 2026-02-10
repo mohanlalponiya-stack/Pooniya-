@@ -1,0 +1,7 @@
+{
+  "name": "Mohan Lal jaat AI",
+  "description": "A comprehensive AI suite for image editing, generation, and intelligent chat using Gemini and Nano Banana models.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
