@@ -8,42 +8,27 @@ export default function App() {
   const [brushSize, setBrushSize] = useState(45);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#0f172a",
-        color: "#f8fafc",
-        padding: 16,
-        boxSizing: "border-box"
-      }}
-    >
+    <div className="min-h-screen bg-slate-900 text-slate-100 flex flex-col items-center px-4">
       {/* Header */}
-      <div style={{ textAlign: "center", marginBottom: 16 }}>
-        <h2 style={{ margin: 0 }}>Mohan Lal jaat</h2>
-        <p style={{ opacity: 0.7, margin: 0 }}>CREATIVE AI SUITE</p>
+      <div className="w-full max-w-3xl py-4 text-center">
+        <h1 className="text-2xl font-bold">Mohan Lal jaat</h1>
+        <p className="text-sm opacity-70">CREATIVE AI SUITE</p>
       </div>
 
-      {/* Upload */}
+      {/* Upload Section */}
       {!image && (
-        <div
-          style={{
-            maxWidth: 360,
-            margin: "0 auto",
-            background: "#1e293b",
-            padding: 20,
-            borderRadius: 12,
-            textAlign: "center"
-          }}
-        >
-          <p>Ready to Edit?</p>
+        <div className="bg-slate-800 rounded-xl p-6 w-full max-w-md text-center">
+          <p className="text-lg mb-4">Ready to Edit?</p>
 
           <input
             type="file"
             accept="image/*"
-            hidden
+            className="hidden"
             id="fileInput"
             onChange={(e) => {
-              if (e.target.files?.[0]) setImage(e.target.files[0]);
+              if (e.target.files && e.target.files[0]) {
+                setImage(e.target.files[0]);
+              }
             }}
           />
 
@@ -51,62 +36,65 @@ export default function App() {
             <Button text="Choose File" />
           </label>
 
-          <div style={{ marginTop: 12 }}>
+          <div className="mt-3">
             <Button text="Live Camera" variant="secondary" />
           </div>
         </div>
       )}
 
-      {/* Editor */}
+      {/* Editor Section */}
       {image && (
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "1fr",
-            gap: 16,
-            maxWidth: 900,
-            margin: "0 auto"
-          }}
-        >
+        <div className="w-full max-w-5xl grid md:grid-cols-2 gap-6 mt-6">
+          {/* Canvas */}
           <ImageCanvas image={image} brushSize={brushSize} />
 
-          <div
-            style={{
-              background: "#1e293b",
-              padding: 16,
-              borderRadius: 12
-            }}
-          >
-            <h3>Edit Controls</h3>
+          {/* Controls */}
+          <div className="bg-slate-800 rounded-xl p-5">
+            <h2 className="font-semibold mb-3">Edit Controls</h2>
 
             <textarea
-              style={{
-                width: "100%",
-                minHeight: 80,
-                background: "#020617",
-                color: "white",
-                borderRadius: 8,
-                padding: 8,
-                border: "none"
-              }}
+              className="w-full p-3 rounded-lg bg-slate-900 text-sm outline-none"
               placeholder="Describe the changes for marked areas..."
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
             />
 
-            <div style={{ marginTop: 12 }}>
-              <label>Brush Size: {brushSize}px</label>
+            {/* Prompt Chips */}
+            <div className="flex flex-wrap gap-2 mt-3 text-xs">
+              {[
+                "Change the color to vibrant blue",
+                "Remove this object",
+                "Replace background with a forest",
+                "Make this area look like metal",
+                "Add a cute cat here"
+              ].map((text) => (
+                <button
+                  key={text}
+                  className="bg-slate-700 px-3 py-1 rounded-full hover:bg-slate-600"
+                  onClick={() => setPrompt(text)}
+                >
+                  {text}
+                </button>
+              ))}
+            </div>
+
+            {/* Brush Size */}
+            <div className="mt-5">
+              <label className="text-xs opacity-70">
+                Brush Size: {brushSize}px
+              </label>
               <input
                 type="range"
                 min={10}
                 max={100}
                 value={brushSize}
                 onChange={(e) => setBrushSize(Number(e.target.value))}
-                style={{ width: "100%" }}
+                className="w-full"
               />
             </div>
 
-            <div style={{ marginTop: 16 }}>
+            {/* Apply Button (जैसा पहले था) */}
+            <div className="mt-6">
               <Button text="Apply AI Edits" disabled />
             </div>
           </div>
