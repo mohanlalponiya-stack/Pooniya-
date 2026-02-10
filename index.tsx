@@ -1,29 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BananaEdit AI</title>
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
 
-    <!-- ✅ Tailwind CDN (ORIGINAL UI के लिए) -->
-    <script src="https://cdn.tailwindcss.com"></script>
+const rootElement = document.getElementById("root");
 
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+if (!rootElement) {
+  throw new Error("Root element not found");
+}
 
-    <style>
-      body {
-        font-family: "Inter", sans-serif;
-        background-color: #0f172a;
-        color: #f8fafc;
-      }
-    </style>
-  </head>
-
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/index.tsx"></script>
-  </body>
-</html>
+ReactDOM.createRoot(rootElement).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
